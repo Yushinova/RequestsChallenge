@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Azure.Messaging;
+using Microsoft.AspNetCore.Mvc;
 using RequestsChallenge.Model;
 using System.Diagnostics.Metrics;
 
@@ -19,9 +20,10 @@ namespace RequestsChallenge.Api
             return await _requestService.ListAllAsync(); ;
         }
         [HttpDelete]
-        public async Task DeleteAllAsync()
+        public async Task<IActionResult> DeleteAllAsync()
         {
             await _requestService.DeleteAllDataAsync();
+            return new ObjectResult(new StringMessage( Message: "Deleted"));
         }
     }
 }

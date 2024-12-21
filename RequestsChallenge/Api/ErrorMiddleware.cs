@@ -27,6 +27,10 @@ namespace RequestsChallenge.Api
             {
                 await context.Response.WriteAsync(new ErrorMessage(Type: "404", Message: "Not Found").ToString());
             }
+            else if (context.Response.StatusCode == 405)
+            {
+                await context.Response.WriteAsync(new ErrorMessage(Type: "405", Message: "Method Not Allowed").ToString());
+            }
             else if (context.Response.StatusCode == 502)
             {
                 await context.Response.WriteAsync(new ErrorMessage(Type: "502", Message: "Bad gateway").ToString());
